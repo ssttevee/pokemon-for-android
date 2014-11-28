@@ -7,6 +7,8 @@ A Pokémon game for Android!
 
 It's like a normal Pokemon game, but more casual and you don't have to walk around, kinda...
 
+This app will be completely free of charge and free of ads; it's mostly to sate my love of pokemon and programming.
+
 ## Details
 
 The idea is to walk around in real life in place of walking around in game.  Each step you take earns you "Action Points" which you use you do various things like fighting wild pokemon or going to heal at the Pokémon Center.
