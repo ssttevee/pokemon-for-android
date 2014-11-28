@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent">
+
+	<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="vertical">
+		<ImageView
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				android:layout_weight=".1"
+				android:padding="3dp"
+				android:onClick="pick"
+				android:tag="1"
+				android:background="#ff91c9be"
+				android:src="@drawable/starter_bulbasaur"/>
+		<ImageView
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				android:layout_weight=".1"
+				android:padding="3dp"
+				android:onClick="pick"
+				android:tag="4"
+				android:background="#ffff9442"
+				android:src="@drawable/starter_charmander"/>
+		<ImageView
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				android:layout_weight=".1"
+				android:padding="3dp"
+				android:onClick="pick"
+				android:tag="7"
+				android:background="#ff8cc5ce"
+				android:src="@drawable/starter_squirtle"/>
+		<ImageView
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				android:layout_weight=".1"
+				android:padding="3dp"
+				android:onClick="pick"
+				android:tag="25"
+				android:background="#fff6e652"
+				android:src="@drawable/starter_pikachu"/>
+		<ImageView
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				android:layout_weight=".1"
+				android:padding="3dp"
+				android:onClick="pick"
+				android:tag="133"
+				android:background="#ffd69e4b"
+				android:src="@drawable/starter_eevee"/>
+	</LinearLayout>
+
+	<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentBottom="true"
+			android:layout_alignParentLeft="true"
+			android:singleLine="true"
+			android:paddingLeft="3dp"
+			android:textColor="#ff512e28"
+			android:text="Portraits created by MapleRose from http://pokewalls.wordpress.com"/>
+
+</RelativeLayout>

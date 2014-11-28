@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.ssttevee.pokemonandroid.view.PokemonPadView xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:custom="http://schemas.android.com/apk/res/com.ssttevee.pokemonandroid"
+		android:layout_width="wrap_content"
+		android:layout_height="57dp"
+		android:clipChildren="false"
+		android:clipToPadding="false"
+		android:background="@drawable/pokemon_pad_normal">
+
+	<com.ssttevee.pokemonandroid.view.PokemonIconView
+			android:layout_width="40dp"
+			android:layout_height="30dp"
+			android:layout_marginLeft="-16dp"
+			android:id="@+id/pokemon"/>
+
+	<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentRight="true"
+			android:layout_alignParentBottom="true"
+			android:textColor="@android:color/white"
+			android:textSize="10sp"
+			android:text="610/610"
+			android:id="@+id/healthNumbers"/>
+
+	<com.ssttevee.pokemonandroid.view.HealthBar
+			android:layout_width="match_parent"
+			android:layout_height="7dp"
+			android:layout_above="@id/healthNumbers"
+			android:layout_toRightOf="@id/pokemon"
+			custom:maxHitPoints="610"
+			custom:hitPoints="4"
+			android:id="@+id/healthBar"/>
+
+	<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_above="@id/healthBar"
+			android:layout_toRightOf="@id/pokemon"
+			android:paddingLeft="30dp"
+			android:textColor="@android:color/white"
+			android:textSize="10sp"
+			android:text="Lv 100"
+			android:id="@+id/pokemonLevel"/>
+
+	<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_above="@id/pokemonLevel"
+			android:layout_toRightOf="@id/pokemon"
+			android:textColor="@android:color/white"
+			android:textSize="12sp"
+			android:text="CHARIZARD"
+			android:id="@+id/pokemonName"/>
+
+</com.ssttevee.pokemonandroid.view.PokemonPadView>

@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="@drawable/battle_bg"
+		android:id="@+id/rootView">
+
+	<ImageView
+			android:layout_width="match_parent"
+			android:layout_height="42dp"
+			android:scaleType="fitXY"
+			android:src="@drawable/battle_bg_top"/>
+
+	<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="160dp"
+			android:layout_alignParentBottom="true"
+			android:layout_alignParentRight="true"
+			android:id="@+id/moveButtonsContainer">
+
+		<View
+				android:layout_width="0dp"
+				android:layout_height="0dp"
+				android:layout_centerInParent="true"
+				android:id="@+id/centerStub"/>
+		<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_alignParentTop="true"
+				android:layout_alignParentLeft="true"
+				android:layout_toLeftOf="@id/centerStub"
+				android:layout_marginLeft="12dp" android:layout_marginTop="12dp"
+				android:layout_marginRight="6dp" android:layout_marginBottom="6dp"
+				android:layout_above="@id/centerStub"/>
+		<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_alignParentTop="true"
+				android:layout_alignParentRight="true"
+				android:layout_toRightOf="@id/centerStub"
+				android:layout_marginLeft="6dp" android:layout_marginTop="12dp"
+				android:layout_marginRight="12dp" android:layout_marginBottom="6dp"
+				android:layout_above="@id/centerStub"/>
+		<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_alignParentBottom="true"
+				android:layout_alignParentLeft="true"
+				android:layout_toLeftOf="@id/centerStub"
+				android:layout_marginLeft="12dp" android:layout_marginTop="6dp"
+				android:layout_marginRight="6dp" android:layout_marginBottom="12dp"
+				android:layout_below="@id/centerStub"/>
+		<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_alignParentBottom="true"
+				android:layout_alignParentRight="true"
+				android:layout_toRightOf="@id/centerStub"
+				android:layout_marginLeft="6dp" android:layout_marginTop="6dp"
+				android:layout_marginBottom="12dp" android:layout_marginRight="12dp"
+				android:layout_below="@id/centerStub"/>
+
+	</RelativeLayout>
+
+	<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="160dp"
+			android:layout_alignParentBottom="true"
+			android:layout_alignParentRight="true"
+			android:orientation="horizontal"
+			android:weightSum="1"
+			android:id="@+id/battleButtons">
+
+		<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight=".5"
+				android:orientation="vertical"
+				android:weightSum="1">
+
+			<TextView
+					android:layout_width="match_parent"
+					android:layout_height="0dp"
+					android:layout_weight=".5"
+					android:layout_marginLeft="12dp" android:layout_marginTop="12dp"
+					android:layout_marginRight="6dp" android:layout_marginBottom="6dp"
+					android:gravity="center"
+					android:background="@drawable/battle_button_shape"
+					android:onClick="click"
+					android:text="FIGHT"
+					android:textColor="@android:color/white"
+					android:id="@+id/btnFight"/>
+
+			<TextView
+					android:layout_width="match_parent"
+					android:layout_height="0dp"
+					android:layout_weight=".5"
+					android:layout_marginLeft="12dp" android:layout_marginTop="6dp"
+					android:layout_marginRight="6dp" android:layout_marginBottom="12dp"
+					android:gravity="center"
+					android:background="@drawable/battle_button_shape"
+					android:onClick="click"
+					android:text="POKEMON"
+					android:textColor="@android:color/white"
+					android:id="@+id/btnPokemon"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight=".5"
+				android:orientation="vertical"
+				android:weightSum="1">
+
+			<TextView
+					android:layout_width="match_parent"
+					android:layout_height="0dp"
+					android:layout_weight=".5"
+					android:layout_marginLeft="6dp" android:layout_marginTop="12dp"
+					android:layout_marginRight="12dp" android:layout_marginBottom="6dp"
+					android:gravity="center"
+					android:background="@drawable/battle_button_shape"
+					android:onClick="click"
+					android:text="BAG"
+					android:textColor="@android:color/white"
+					android:id="@+id/btnBag"/>
+
+			<TextView
+					android:layout_width="match_parent"
+					android:layout_height="0dp"
+					android:layout_weight=".5"
+					android:layout_marginLeft="6dp" android:layout_marginTop="6dp"
+					android:layout_marginBottom="12dp" android:layout_marginRight="12dp"
+					android:gravity="center"
+					android:background="@drawable/battle_button_shape"
+					android:onClick="click"
+					android:text="RUN"
+					android:textColor="@android:color/white"
+					android:id="@+id/btnRun"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<TextView
+			android:layout_width="match_parent"
+			android:layout_height="72dp"
+			android:layout_above="@id/battleButtons"
+			android:layout_marginRight="12dp"
+			android:layout_marginLeft="12dp"
+			android:background="@drawable/battle_dialog_box"
+			android:lineSpacingMultiplier="1.5"
+			android:id="@+id/battleDialog"/>
+
+	<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_alignParentTop="true"
+			android:layout_above="@id/battleDialog"
+			android:layout_margin="12dp"
+			android:weightSum="1"
+			android:orientation="vertical">
+
+		<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_weight=".5"
+				android:layout_marginBottom="6dp"
+				android:id="@+id/battle_top">
+
+			<LinearLayout
+					android:layout_width="wrap_content"
+					android:layout_height="match_parent"
+					android:layout_alignParentLeft="true"
+					android:layout_marginBottom="48dp"
+					android:gravity="center_vertical"
+					android:orientation="vertical"
+					android:id="@+id/healthBoardContainerTop"/>
+
+			<ImageView
+					android:layout_width="wrap_content"
+					android:layout_height="match_parent"
+					android:layout_alignParentBottom="true"
+					android:layout_alignParentRight="true"
+					android:layout_toRightOf="@id/healthBoardContainerTop"
+					android:scaleType="fitEnd"
+					android:src="@drawable/battle_pad_1"
+					android:id="@+id/battle_pad"/>
+
+			<LinearLayout
+					android:layout_width="wrap_content"
+					android:layout_height="match_parent"
+					android:layout_alignParentBottom="true"
+					android:layout_alignParentRight="true"
+					android:layout_toRightOf="@id/healthBoardContainerTop"
+					android:gravity="center_horizontal|bottom"
+					android:orientation="horizontal"
+					android:id="@+id/pokemonContainerTop"/>
+
+		</RelativeLayout>
+
+		<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_weight=".5"
+				android:layout_marginTop="6dp"
+				android:id="@+id/battle_bottom">
+
+			<LinearLayout
+					android:layout_width="wrap_content"
+					android:layout_height="match_parent"
+					android:layout_alignParentRight="true"
+					android:layout_marginBottom="48dp"
+					android:gravity="center_vertical"
+					android:orientation="vertical"
+					android:id="@+id/healthBoardContainerBottom"/>
+
+			<ImageView
+					android:layout_width="wrap_content"
+					android:layout_height="match_parent"
+					android:layout_alignParentBottom="true"
+					android:layout_alignParentLeft="true"
+					android:layout_toLeftOf="@id/healthBoardContainerBottom"
+					android:scaleType="fitEnd"
+					android:src="@drawable/battle_pad_1"
+					android:id="@id/battle_pad"/>
+
+			<LinearLayout
+					android:layout_width="wrap_content"
+					android:layout_height="match_parent"
+					android:layout_alignParentBottom="true"
+					android:layout_alignParentLeft="true"
+					android:layout_toLeftOf="@id/healthBoardContainerBottom"
+					android:gravity="center_horizontal|bottom"
+					android:orientation="horizontal"
+					android:id="@+id/pokemonContainerBottom"/>
+
+		</RelativeLayout>
+
+	</LinearLayout>
+
+	<View
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:id="@+id/ackListener"/>
+
+	<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:visibility="invisible"
+			android:id="@+id/pokeball"/>
+
+</RelativeLayout>

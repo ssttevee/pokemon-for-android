@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<dimen name="drawerMenuEntryLR">20dp</dimen>
+	<dimen name="drawerMenuEntryTB">10dp</dimen>
+
+	<dimen name="trainerCardPokemonPadding">0dp</dimen>
+	<dimen name="trainerCardPokemonSize">36dp</dimen>
+
+	<dimen name="frontPageButtonHeight">64dp</dimen>
+	<dimen name="frontPageButtonWidth">120dp</dimen>
+
+	<dimen name="optionEntrySpacingHeight">6dp</dimen>
+
+	<dimen name="backpackTabBottomMargin">-2dp</dimen>
+</resources>

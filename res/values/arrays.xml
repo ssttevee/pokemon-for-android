@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="homeTextViews">
+		<item>@id/tcName</item>
+    </array>
+    <array name="optionsTextViews">
+		<item>@id/titleOptions</item>
+    </array>
+
+	<string-array name="tilePieces">
+		<item>topLeft,,tl</item>
+		<item>topMiddle,,tm</item>
+		<item>topRight,,tr</item>
+		<item>middleLeft,,ml</item>
+		<item>middleMiddle,,mm</item>
+		<item>middleRight,,mr</item>
+		<item>bottomLeft,,bl</item>
+		<item>bottomMiddle,,bm</item>
+		<item>bottomRight,,br</item>
+	</string-array>
+
+	<string-array name="drawerItems">
+		<item>Dashboard</item>
+		<item>Wild Pokemon</item>
+		<item>Town</item>
+		<item>Trainer</item>
+		<item>Gym</item>
+		<item>Quests</item>
+		<item>Pokedex</item>
+		<item>Connect</item>
+		<item>Options</item>
+	</string-array>
+
+	<string-array name="townBuildings">
+		<item>Pokémon Center</item>
+		<item>PokéMall</item>
+		<item>Pokémon Renamer</item>
+	</string-array>
+
+	<integer-array name="townBuildingsColors">
+		<item>0xffc84050</item>
+		<item>0xff3f66a5</item>
+		<item>0xff46c840</item>
+	</integer-array>
+</resources>

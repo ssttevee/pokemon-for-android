@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+	<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="?android:attr/actionBarSize"
+			android:background="@drawable/ab_bg"
+			android:paddingBottom="0dp"
+			android:paddingTop="0dp"
+			android:gravity="center_vertical"
+			android:id="@+id/pseudoActionBar">
+
+		<ImageView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:src="@drawable/logo_main"
+				android:id="@+id/homeIcon"/>
+
+	</RelativeLayout>
+
+	<android.support.v4.widget.DrawerLayout
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_below="@id/pseudoActionBar"
+			android:layout_alignParentBottom="true"
+			android:id="@+id/drawerLayout">
+
+		<!-- The main content view -->
+		<FrameLayout
+				android:id="@+id/contentFrame"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" />
+
+		<com.ssttevee.pokemonandroid.view.TrainerCardView
+				android:orientation="vertical"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="-146dp"
+				android:padding="12dp"
+				android:id="@+id/trainerCard">
+
+			<ImageView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentLeft="true"
+					android:layout_alignParentTop="true"
+					android:id="@+id/tcLeft"
+					android:src="@drawable/tc_left"/>
+
+			<ImageView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentRight="true"
+					android:layout_alignParentTop="true"
+					android:id="@+id/tcRight"
+					android:src="@drawable/tc_right"/>
+
+			<ImageView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_toRightOf="@id/tcLeft"
+					android:layout_toLeftOf="@id/tcRight"
+					android:id="@+id/tcMiddle"
+					android:scaleType="fitXY"
+					android:src="@drawable/tc_mid"/>
+
+			<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_toRightOf="@id/tcLeft"
+					android:layout_alignParentTop="true"
+					android:paddingLeft="9dp"
+					android:paddingRight="9dp"
+					android:gravity="center_vertical"
+					android:text="SHINIGAMI4560"
+					android:textSize="13dp"
+					android:background="@drawable/tc_02"
+					android:id="@+id/tcName"/>
+
+			<LinearLayout
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentLeft="true"
+					android:layout_alignBottom="@id/tcLeft"
+					android:layout_alignTop="@id/tcLeft"
+					android:layout_toLeftOf="@id/tcRight"
+					android:paddingTop="34dp"
+					android:paddingLeft="9dp"
+					android:paddingRight="9dp"
+					android:paddingBottom="9dp"
+					android:orientation="horizontal"
+					android:id="@+id/tcStats">
+
+				<LinearLayout
+						android:layout_width="0dp"
+						android:layout_height="match_parent"
+						android:layout_weight=".5"
+						android:orientation="vertical"/>
+
+				<LinearLayout
+						android:layout_width="0dp"
+						android:layout_height="match_parent"
+						android:layout_weight=".5"
+						android:orientation="vertical"/>
+
+			</LinearLayout>
+
+		</com.ssttevee.pokemonandroid.view.TrainerCardView>
+
+		<!-- The navigation drawer -->
+		<ListView
+				android:id="@+id/menuDrawer"
+				android:layout_width="160dp"
+				android:layout_height="match_parent"
+				android:layout_gravity="start"
+				android:paddingLeft="3dp"
+				android:choiceMode="singleChoice"
+				android:divider="@android:color/transparent"
+				android:dividerHeight="0dp"
+				android:background="@drawable/drawer_bg"
+				android:paddingTop="10dp"/>
+
+	</android.support.v4.widget.DrawerLayout>
+
+</RelativeLayout>

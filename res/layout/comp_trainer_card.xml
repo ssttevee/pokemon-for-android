@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.ssttevee.pokemonandroid.view.TrainerCardView xmlns:android="http://schemas.android.com/apk/res/android"
+				android:orientation="vertical"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:padding="12dp">
+
+	<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentTop="true"
+			android:id="@+id/tcLeft"
+			android:src="@drawable/tc_left"/>
+
+	<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentRight="true"
+			android:layout_alignParentTop="true"
+			android:id="@+id/tcRight"
+			android:src="@drawable/tc_right"/>
+
+	<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/tcLeft"
+			android:layout_toLeftOf="@id/tcRight"
+			android:id="@+id/tcMiddle"
+			android:scaleType="fitXY"
+			android:src="@drawable/tc_mid"/>
+
+	<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/tcLeft"
+			android:layout_alignParentTop="true"
+			android:paddingLeft="9dp"
+			android:paddingRight="9dp"
+			android:gravity="center_vertical"
+			android:text="SHINIGAMI4560"
+			android:textSize="13dp"
+			android:background="@drawable/tc_02"
+			android:id="@+id/tcName"/>
+
+	<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentLeft="true"
+			android:layout_alignBottom="@id/tcLeft"
+			android:layout_alignTop="@id/tcLeft"
+			android:layout_toLeftOf="@id/tcRight"
+			android:paddingTop="34dp"
+			android:paddingLeft="9dp"
+			android:paddingRight="9dp"
+			android:paddingBottom="9dp"
+			android:orientation="horizontal"
+			android:id="@+id/tcStats">
+
+		<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight=".5"
+				android:orientation="vertical"/>
+
+		<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight=".5"
+				android:orientation="vertical"/>
+
+	</LinearLayout>
+
+</com.ssttevee.pokemonandroid.view.TrainerCardView>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.ssttevee.pokemonandroid.view.BackpackView xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true">
+
+	<ListView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@+id/backpackTabs"
+			android:layout_alignTop="@+id/backpackTabs"
+			android:layout_alignBottom="@+id/backpackTabs"
+			android:background="@drawable/backpack_bg"
+			android:divider="@drawable/backpack_divider"
+			android:dividerHeight="2dp"
+			android:id="@+id/backpackItems"/>
+
+	<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginRight="-3.2dp"
+			android:orientation="vertical"
+			android:id="@+id/backpackTabs"/>
+
+	<RelativeLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignLeft="@id/backpackItems"
+			android:layout_alignTop="@id/backpackItems"
+			android:layout_alignRight="@id/backpackItems"
+			android:layout_alignBottom="@id/backpackItems">
+		<ProgressBar
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:indeterminate="true"
+				style="?android:attr/progressBarStyle"
+				android:layout_centerInParent="true"
+				android:visibility="gone"
+				android:id="@+id/progressBar"/>
+	</RelativeLayout>
+
+</com.ssttevee.pokemonandroid.view.BackpackView>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="allOptions">
+		<item>PedometerSensitivity</item>
+		<item>TextSpeed</item>
+		<item>BattleStyle</item>
+		<item>FrameStyle</item>
+	</string-array>
+
+	<string name="optPedometerSensitivityLabel">Pedometer Sensitivity</string>
+	<string name="optTextSpeedLabel">Text Speed</string>
+	<string name="optBattleStyleLabel">Battle Style</string>
+	<string name="optFrameStyleLabel">Box Frame</string>
+
+	<integer name="optPedometerSensitivityDefault">1</integer>
+	<integer name="optTextSpeedDefault">1</integer>
+	<integer name="optBattleStyleDefault">0</integer>
+	<integer name="optFrameStyleDefault">0</integer>
+
+	<string-array name="optPedometerSensitivity">
+		<item>LOW</item>
+		<item>MEDIUM</item>
+		<item>HIGH</item>
+	</string-array>
+
+	<string-array name="optTextSpeed">
+		<item>HIGH</item>
+		<item>MEDIUM</item>
+		<item>LOW</item>
+	</string-array>
+
+	<string-array name="optBattleStyle">
+		<item>SHIFT</item>
+		<item>SET</item>
+	</string-array>
+
+	<string-array name="optFrameStyle">
+		<item>FRAME01</item>
+		<item>FRAME02</item>
+		<item>FRAME03</item>
+		<item>FRAME04</item>
+		<item>FRAME05</item>
+		<item>FRAME06</item>
+		<item>FRAME07</item>
+		<item>FRAME08</item>
+		<item>FRAME09</item>
+		<item>FRAME10</item>
+		<item>FRAME11</item>
+		<item>FRAME12</item>
+		<item>FRAME13</item>
+		<item>FRAME14</item>
+		<item>FRAME15</item>
+		<item>FRAME16</item>
+		<item>FRAME17</item>
+		<item>FRAME18</item>
+		<item>FRAME19</item>
+		<item>FRAME20</item>
+		<item>FRAME21</item>
+		<item>FRAME22</item>
+		<item>FRAME23</item>
+		<item>FRAME24</item>
+		<item>FRAME25</item>
+		<item>FRAME26</item>
+		<item>FRAME27</item>
+		<item>FRAME28</item>
+		<item>FRAME29</item>
+	</string-array>
+</resources>

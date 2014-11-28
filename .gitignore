@@ -1,0 +1,9 @@
+/bin
+/gen
+assets/
+res/drawable*/*.png
+.idea/
+.project
+psd/
+libs/
+android-support-v7-appcompat/

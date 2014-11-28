@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.ssttevee.pokemonandroid.view.MapsButtonView xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:padding="12dp">
+
+	<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentTop="true"
+			android:layout_alignParentLeft="true"
+			android:id="@+id/topLeft"/>
+
+	<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentTop="true"
+			android:layout_alignParentRight="true"
+			android:id="@+id/topRight"/>
+
+	<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentTop="true"
+			android:layout_toLeftOf="@id/topRight"
+			android:layout_toRightOf="@id/topLeft"
+			android:scaleType="fitXY"
+			android:id="@+id/topMiddle"/>
+
+	<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_below="@id/topLeft"
+			android:layout_alignParentLeft="true"
+			android:scaleType="fitXY"
+			android:id="@+id/middleLeft"/>
+
+	<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_below="@id/topRight"
+			android:layout_alignParentRight="true"
+			android:scaleType="fitXY"
+			android:id="@+id/middleRight"/>
+
+	<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toLeftOf="@id/topRight"
+			android:layout_toRightOf="@id/topLeft"
+			android:layout_below="@id/topMiddle"
+			android:gravity="center_horizontal|center_vertical"
+			android:id="@+id/middleMiddle"/>
+
+	<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentLeft="true"
+			android:layout_below="@id/middleMiddle"
+			android:id="@+id/bottomLeft"/>
+
+	<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentRight="true"
+			android:layout_below="@id/middleMiddle"
+			android:id="@+id/bottomRight"/>
+
+	<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_below="@id/middleMiddle"
+			android:layout_toLeftOf="@id/topRight"
+			android:layout_toRightOf="@id/topLeft"
+			android:scaleType="fitXY"
+			android:id="@+id/bottomMiddle"/>
+
+</com.ssttevee.pokemonandroid.view.MapsButtonView>
