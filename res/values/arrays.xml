@@ -35,11 +35,13 @@
 		<item>Pokémon Center</item>
 		<item>PokéMall</item>
 		<item>Pokémon Renamer</item>
+		<item>Move Tutor</item>
 	</string-array>
 
 	<integer-array name="townBuildingsColors">
 		<item>0xffc84050</item>
 		<item>0xff3f66a5</item>
 		<item>0xff46c840</item>
+		<item>0xff9c29c2</item>
 	</integer-array>
 </resources>
