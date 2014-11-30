@@ -8,6 +8,8 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.ssttevee.pokemonandroid.R;
 import com.ssttevee.pokemonandroid.activity.BattleActivity;
@@ -31,7 +33,7 @@ public class BattleAnimator {
 	private BattleActivity battleActivity;
 
 	public static enum Action {
-		MESSAGE, SEND_POKEMON, RETRIEVE_POKEMON, FAINT_POKEMON, GAIN_EXP, LEVEL_UP, DELTA_HP, CALLBACK, THROW_BALL
+		WAIT, MESSAGE, SEND_POKEMON, RETRIEVE_POKEMON, FAINT_POKEMON, GAIN_EXP, LEVEL_UP, DELTA_HP, CALLBACK, THROW_BALL, SUCK_POKEMON, DROP_BALL, SHAKE_BALL, LOCK_BALL
 	}
 
 	public BattleAnimator() {
@@ -48,6 +50,13 @@ public class BattleAnimator {
 						break;
 					case SEND_POKEMON:
 						getBHV((Pokemon) data.get(0)).setVisibility(View.VISIBLE);
+						break;
+					case SHAKE_BALL:
+						battleActivity.findViewById(R.id.pokeball).setPivotY(battleActivity.findViewById(R.id.pokeball).getHeight()/2);
+						battleActivity.findViewById(R.id.pokeball).setPivotX(battleActivity.findViewById(R.id.pokeball).getWidth()/2);
+						break;
+					case LOCK_BALL:
+						for(ImageView iv : (ImageView[]) data.get(0)) ((RelativeLayout) battleActivity.findViewById(R.id.rootView)).removeView(iv);
 						break;
 				}
 
@@ -105,6 +114,9 @@ public class BattleAnimator {
 		if(actions.size() > 0 && acked) {
 //			isRunning = true;
 			switch(actions.get(0)) {
+				case WAIT:
+					valueAnimator.setDuration((Integer) data.get(0));
+					break;
 				case MESSAGE:
 					final String message = data.get(0) + " ";
 					valueAnimator.setFloatValues(0, message.length());
@@ -161,6 +173,7 @@ public class BattleAnimator {
 					break;
 				case RETRIEVE_POKEMON:
 					getBHV((Pokemon) data.get(0)).setVisibility(View.INVISIBLE);
+				case SUCK_POKEMON:
 					valueAnimator.setFloatValues(1, 0);
 					valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 						@Override
@@ -182,14 +195,66 @@ public class BattleAnimator {
 					break;
 				case THROW_BALL:
 					valueAnimator.setFloatValues(0, 1);
+					valueAnimator.setDuration(700);
 					valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 						@Override
 						public void onAnimationUpdate(ValueAnimator valueAnimator) {
 							Float[] positions = (Float[]) data.get(0);
 							Float val = (Float) valueAnimator.getAnimatedValue();
 							View pokeball = battleActivity.findViewById(R.id.pokeball);
-							pokeball.setTranslationX(positions[0] + val * positions[2]);
-							pokeball.setTranslationY((float) (positions[1] + positions[3] * (-Math.pow(1.6 * val - 1.1, 2) + 1.25)));
+							pokeball.setTranslationX(positions[0] + val * (positions[2] - positions[0]));
+							pokeball.setTranslationY(positions[1] + (positions[3] - positions[1]) * (float) (-Math.pow((1.6 * val) - 1.1, 2) + 1.25));
+							pokeball.setRotation(val * 720);
+						}
+					});
+					break;
+				case DROP_BALL:
+					valueAnimator.setFloatValues(0, 1);
+					valueAnimator.setDuration(200);
+					valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+						@Override
+						public void onAnimationUpdate(ValueAnimator valueAnimator) {
+							Float[] positions = (Float[]) data.get(0);
+							Float val = (Float) valueAnimator.getAnimatedValue();
+							View pokeball = battleActivity.findViewById(R.id.pokeball);
+
+							pokeball.setTranslationY(positions[0] + (positions[1] - positions[0]) * val);
+
+						}
+					});
+					break;
+				case SHAKE_BALL:
+					battleActivity.findViewById(R.id.pokeball).setPivotY(battleActivity.findViewById(R.id.pokeball).getHeight());
+					battleActivity.findViewById(R.id.pokeball).setPivotX(battleActivity.findViewById(R.id.pokeball).getWidth()/2);
+					valueAnimator.setFloatValues(0, 1);
+					valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+						@Override
+						public void onAnimationUpdate(ValueAnimator valueAnimator) {
+							Float val = (Float) valueAnimator.getAnimatedValue();
+							View pokeball = battleActivity.findViewById(R.id.pokeball);
+							pokeball.setRotation((float) (-Math.sin(2 * val * Math.PI) * 45));
+						}
+					});
+					break;
+				case LOCK_BALL:
+					for(ImageView iv : (ImageView[]) data.get(0)) ((RelativeLayout) battleActivity.findViewById(R.id.rootView)).addView(iv);
+					valueAnimator.setFloatValues(0, 1);
+					valueAnimator.setDuration(200);
+					valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+						ImageView[] stars = (ImageView[]) data.get(0);
+						View pokeball = battleActivity.findViewById(R.id.pokeball);
+						float distance = pokeball.getHeight() * 3;
+						float initX = pokeball.getTranslationX() + pokeball.getWidth() / 2;
+						float initY = pokeball.getTranslationY() + pokeball.getHeight() / 2;
+
+						@Override
+						public void onAnimationUpdate(ValueAnimator valueAnimator) {
+							Float val = (Float) valueAnimator.getAnimatedValue();
+							for(ImageView star : stars) {
+								int direction = (Integer) star.getTag();
+								star.setX(initX + (float) Math.cos(direction) * distance * val);
+								star.setY(initY + (float) Math.sin(direction) * distance * val);
+							}
 						}
 					});
 					break;

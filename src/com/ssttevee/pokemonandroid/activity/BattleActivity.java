@@ -3,12 +3,16 @@ package com.ssttevee.pokemonandroid.activity;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -23,6 +27,7 @@ import com.ssttevee.pokemonandroid.view.BattleHealthView;
 import com.ssttevee.pokemonandroid.view.MoveButtonView;
 import com.ssttevee.pokemonandroid.view.PokemonView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -77,8 +82,8 @@ public class BattleActivity extends Activity {
 	private void setup() {
 		changeButton(R.id.btnBag, 0xffe09828);
 		changeButton(R.id.btnFight, 0xffe83838);
-		changeButton(R.id.btnRun, 0xffc8);
-		changeButton(R.id.btnPokemon, 0xff58028);
+		changeButton(R.id.btnRun, 0xff2890c8);
+		changeButton(R.id.btnPokemon, 0xff58b028);
 		((TextView) findViewById(R.id.battleDialog)).setTypeface(Helper.Fonts.getPkmnFL());
  
 		findViewById(R.id.btnBag).setOnClickListener(new View.OnClickListener() {
@@ -236,14 +241,15 @@ public class BattleActivity extends Activity {
 					return;
 				}
 			}
-			animator.addAction(BattleAnimator.Action.MESSAGE, "What will " + getAlly().nickname + " do?", false);
-			animator.start(new Runnable() {
-				@Override
-				public void run() {
-					hideMoves();
-				}
-			});
 		}
+
+		animator.addAction(BattleAnimator.Action.MESSAGE, "What will " + getAlly().nickname + " do?", false);
+		animator.start(new Runnable() {
+			@Override
+			public void run() {
+				hideMoves();
+			}
+		});
 	}
  
 	private void animateLevelUp(final Pokemon pokemon) {
@@ -279,29 +285,129 @@ public class BattleActivity extends Activity {
 		}
 	}
  
-	public void throwBall(int ballId) {
+	public void throwBall(final int ballId) {
 		int catchRate = Helper.getIntegerFromDb(Helper.dataMgr.pokemonDb, "pokemon_species	", "capture_rate", "id=" + getEnemy().id, null);
 		double ballBonus = Helper.getDoubleFromDb(Helper.dataMgr.mapsDb, "pokeballs", "	multiplier", "id=" + ballId, null);
 		double statusBonus = getEnemy().ailment == 2 || getEnemy().ailment == 3 ? 2 : getEnemy().ailment == 1 || getEnemy().ailment == 4 || getEnemy().ailment == 5 ? 1.5 : 1;
 		double a = (3*getEnemy().getStat(Pokemon.IVStat.HP) - 2*getEnemy().currentHp) * catchRate * ballBonus * statusBonus / (3*getEnemy().getStat(Pokemon.IVStat.HP));
 		double b = (Math.pow(2, 16) - 1) * Math.pow(a / (Math.pow(2, 8) - 1), 0.25);
  
-		float initX = findViewById(R.id.pokemonContainerBottom).getX();
-		float initY = findViewById(R.id.pokemonContainerBottom).getY();
-		float destX = findViewById(R.id.pokemonContainerTop).getX();
-		float destY = findViewById(R.id.pokemonContainerTop).getY();
- 
-		animator.addAction(BattleAnimator.Action.THROW_BALL, new Float[] {initX , initY, destX, destY});
- 
-		for(int i = 0;	i	< 4  ; i++) {
+		float initX = findViewById(R.id.pokemonContainerBottom).getX() + findViewById(R.id.pokemonContainerBottom).getWidth()/2;
+		float initY = findViewById(R.id.battle_bottom).getY() + findViewById(R.id.battle_bottom).getHeight()/2;
+		float destX = findViewById(R.id.pokemonContainerTop).getX() + findViewById(R.id.pokemonContainerTop).getWidth()/2;
+		float destY = findViewById(R.id.battle_top).getY() + findViewById(R.id.battle_top).getHeight()/2;
+		float fallY = findViewById(R.id.battle_top).getY() + findViewById(R.id.battle_top).getHeight()*4/5;
+
+		try {
+			Bitmap bm = BitmapFactory.decodeStream(getResources().getAssets().open("sprites/balls/_" + ballId + ".png"));
+			BitmapDrawable ball = new BitmapDrawable(getResources(), bm);
+			ball.setAntiAlias(false);
+			ball.setDither(false);
+
+			((ImageView) findViewById(R.id.pokeball)).setImageDrawable(ball);
+			findViewById(R.id.pokeball).setMinimumWidth(Helper.dpToPx(bm.getWidth()));
+			findViewById(R.id.pokeball).setMinimumHeight(Helper.dpToPx(bm.getHeight()));
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		animator.addAction(BattleAnimator.Action.MESSAGE, "You threw a " + Helper.getStringFromDb(Helper.dataMgr.mapsDb, "pokeballs", "name", "id=" + ballId, null) + " at " + getEnemy().nickname, false);
+
+		findViewById(R.id.pokeball).setVisibility(View.VISIBLE);
+		findViewById(R.id.pokeball).setTranslationX(initX);
+		findViewById(R.id.pokeball).setTranslationX(initY);
+		animator.addAction(BattleAnimator.Action.THROW_BALL, new Float[]{initX, initY, destX, destY});
+		animator.addAction(BattleAnimator.Action.CALLBACK, new Runnable() {
+			@Override
+			public void run() {
+				try {
+					Bitmap bm = BitmapFactory.decodeStream(getResources().getAssets().open("sprites/balls-open/_" + ballId + ".png"));
+					BitmapDrawable ball = new BitmapDrawable(getResources(), bm);
+
+					((ImageView) findViewById(R.id.pokeball)).setImageDrawable(ball);
+				} catch(IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		animator.addAction(BattleAnimator.Action.SUCK_POKEMON, getEnemy());
+		animator.addAction(BattleAnimator.Action.CALLBACK, new Runnable() {
+			@Override
+			public void run() {
+				try {
+					Bitmap bm = BitmapFactory.decodeStream(getResources().getAssets().open("sprites/balls/_" + ballId + ".png"));
+					BitmapDrawable ball = new BitmapDrawable(getResources(), bm);
+
+					((ImageView) findViewById(R.id.pokeball)).setImageDrawable(ball);
+				} catch(IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		animator.addAction(BattleAnimator.Action.DROP_BALL, new Float[] {destY, fallY});
+		animator.addAction(BattleAnimator.Action.WAIT, 300);
+
+		for(int i = 0; i < 4; i++) {
 			if(rnd.nextInt((int) Math.pow(2, 16)) < b) {
 				// Shake Pokeball
+				if(i == 3) break;
+				animator.addAction(BattleAnimator.Action.SHAKE_BALL, null);
+				animator.addAction(BattleAnimator.Action.WAIT, 700);
 			} else {
 				// Pokemon escaped
- 
+				animator.addAction(BattleAnimator.Action.CALLBACK, new Runnable() {
+					@Override
+					public void run() {
+						try {
+							Bitmap bm = BitmapFactory.decodeStream(getResources().getAssets().open("sprites/balls-open/_" + ballId + ".png"));
+							BitmapDrawable ball = new BitmapDrawable(getResources(), bm);
+
+							((ImageView) findViewById(R.id.pokeball)).setImageDrawable(ball);
+						} catch(IOException e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				animator.addAction(BattleAnimator.Action.SEND_POKEMON, getEnemy());
+				animator.addAction(BattleAnimator.Action.CALLBACK, new Runnable() {
+					@Override
+					public void run() {
+						findViewById(R.id.pokeball).setVisibility(View.INVISIBLE);
+					}
+				});
+				animator.addAction(BattleAnimator.Action.MESSAGE, capFailMsgs[i], true);
+
+				movesQueue.add(new QueuedMove(getEnemy(), getEnemy().moves.get(rnd.nextInt(getEnemy().moves.size())), getAlly()));
+
+				runTurn();
+				return;
 			}
 		}
-		animator.start();
+
+		try {
+			Bitmap bm = BitmapFactory.decodeStream(getResources().getAssets().open("effects/star.png"));
+			ImageView[] stars = new ImageView[6];
+			for(int i = 0; i < stars.length; i++) {
+				stars[i] = new ImageView(this);
+				stars[i].setScaleType(ImageView.ScaleType.FIT_XY);
+				stars[i].setMinimumWidth(Helper.dpToPx(7));
+				stars[i].setMinimumHeight(Helper.dpToPx(7));
+				stars[i].setTag(rnd.nextInt(360));
+				stars[i].setImageBitmap(bm);
+			}
+			animator.addAction(BattleAnimator.Action.LOCK_BALL, stars);
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+
+		animator.addAction(BattleAnimator.Action.MESSAGE, "Gotcha! " + getEnemy().nickname + " was caught!", true);
+		animator.start(new Runnable() {
+			@Override
+			public void run() {
+				getEnemy().ballId = ballId;
+				Helper.dataMgr.addToPokemonTeam(getEnemy());
+				finish();
+			}
+		});
 	}
  
  
