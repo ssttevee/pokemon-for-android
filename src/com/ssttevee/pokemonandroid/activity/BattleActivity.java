@@ -18,6 +18,7 @@ import com.ssttevee.pokemonandroid.helper.Pokemon;
 import com.ssttevee.pokemonandroid.helper.QueuedMove;
 import com.ssttevee.pokemonandroid.util.BattleAnimator;
 import com.ssttevee.pokemonandroid.util.Helper;
+import com.ssttevee.pokemonandroid.view.BackpackView;
 import com.ssttevee.pokemonandroid.view.BattleHealthView;
 import com.ssttevee.pokemonandroid.view.MoveButtonView;
 import com.ssttevee.pokemonandroid.view.PokemonView;
@@ -87,6 +88,7 @@ public class BattleActivity extends Activity {
 				dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 				dialog.setContentView(R.layout.comp_backpack);
 				dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+				((BackpackView) dialog.findViewById(R.id.backpack)).dialog = dialog;
 				dialog.show();
 			}
 		});

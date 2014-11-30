@@ -1,15 +1,13 @@
 package com.ssttevee.pokemonandroid.view;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.AttributeSet;
 import android.util.SparseIntArray;
 import android.util.TypedValue;
-import android.view.Gravity;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.*;
 import com.ssttevee.pokemonandroid.R;
 import com.ssttevee.pokemonandroid.activity.BattleActivity;
@@ -25,6 +23,7 @@ public class BackpackView extends RelativeLayout {
 	private LinearLayout tabContainer;
 
 	private int item;
+	public Dialog dialog;
 
 	public BackpackView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -43,6 +42,7 @@ public class BackpackView extends RelativeLayout {
 		final PopupMenu.OnMenuItemClickListener menuItemClickListener = new PopupMenu.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem menuItem) {
+				if(dialog != null) dialog.dismiss();
 				switch(menuItem.getItemId()) {
 					case R.id.use:
 						useItem(item);
@@ -74,7 +74,7 @@ public class BackpackView extends RelativeLayout {
 
 	private void useItem(int itemId) {
 		if(isBattle()) {
-			BattleActivity ba = (BattleActivity) getContext();
+			BattleActivity ba = getBattleActivity();
 			switch(itemId) {
 				case 1: // Master ball
 					ba.throwBall(4);
@@ -101,13 +101,23 @@ public class BackpackView extends RelativeLayout {
 	}
 
 	private boolean isBattle() {
-		return getContext() instanceof BattleActivity;
+		return getContext() instanceof BattleActivity || (getContext() instanceof ContextThemeWrapper && ((ContextThemeWrapper) getContext()).getBaseContext() instanceof BattleActivity);
+	}
+
+	private BattleActivity getBattleActivity() {
+		if(isBattle()) {
+			if(getContext() instanceof BattleActivity) return (BattleActivity) getContext();
+			else return (BattleActivity) ((ContextThemeWrapper) getContext()).getBaseContext();
+		}
+		return null;
 	}
 
 	private void addTabs(ArrayList<String> tabs) {
 		tabContainer = (LinearLayout) findViewById(R.id.backpackTabs);
 		for(int i = 0; i < tabs.size(); i++) {
+			if(i == 3) continue;
 			if(i == 5) continue;
+			if(i == 7) continue;
 
 			// Create and setup a new button
 			TextView tab = new TextView(getContext());
